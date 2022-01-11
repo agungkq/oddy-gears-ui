@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="@drawable/bg_gears_toolbar"
+    app:contentInsetEnd="30dp"
+    app:contentInsetStart="30dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivToolbarBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <com.oddy.gearsui.GearsTextView
+            android:id="@+id/gtvToolbarTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/gtvToolbarSubtitle"
+            app:layout_constraintEnd_toStartOf="@id/ivToolbarNotification"
+            app:layout_constraintStart_toEndOf="@id/ivToolbarBack"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginEnd="34dp"
+            app:size="highSpeed18" />
+
+        <com.oddy.gearsui.GearsTextView
+            android:id="@+id/gtvToolbarSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha=".5"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gtvToolbarTitle"
+            app:size="highSpeed14" />
+
+        <ImageView
+            android:id="@+id/ivToolbarNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_notification" />
+
+        <ImageView
+            android:id="@+id/ivToolbarNotificationIndicator"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/bg_notification_indicator"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/ivToolbarNotification"
+            app:layout_constraintTop_toTopOf="@id/ivToolbarNotification"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.Toolbar>

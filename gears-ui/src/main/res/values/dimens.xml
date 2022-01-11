@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="low_speed_12_line_height">14sp</dimen>
+    <dimen name="low_speed_14_line_height">18sp</dimen>
+    <dimen name="low_speed_16_line_height">20sp</dimen>
+    <dimen name="high_speed_14_line_height">18sp</dimen>
+    <dimen name="high_speed_16_line_height">20sp</dimen>
+    <dimen name="high_speed_18_line_height">22sp</dimen>
+    <dimen name="high_speed_20_line_height">24sp</dimen>
+    <dimen name="high_speed_24_line_height">32sp</dimen>
+    <dimen name="high_speed_30_line_height">36sp</dimen>
+
+    <dimen name="gears_text_field_border_size">1dp</dimen>
+    <dimen name="gears_text_field_border_radius">16dp</dimen>
+    <dimen name="gears_text_field_padding">4dp</dimen>
+    <dimen name="gears_text_field_prefix_suffix_padding">8dp</dimen>
+    <dimen name="gears_text_field_content_margin">16dp</dimen>
+
+    <dimen name="prefix_suffix_size">24dp</dimen>
+
+    <dimen name="gears_button_padding_horizontal_small">16dp</dimen>
+    <dimen name="gears_button_padding_vertical_small">7dp</dimen>
+    <dimen name="gears_button_padding_horizontal_medium">16dp</dimen>
+    <dimen name="gears_button_padding_vertical_medium">10dp</dimen>
+    <dimen name="gears_button_padding_horizontal_large">16dp</dimen>
+    <dimen name="gears_button_padding_vertical_large">13dp</dimen>
+    <dimen name="gears_button_corner_radius">16dp</dimen>
+    <dimen name="gears_button_border_size">1dp</dimen>
+
+    <dimen name="gears_circular_button_corner_radius">100dp</dimen>
+    <dimen name="gears_circular_button_size_xs">32dp</dimen>
+    <dimen name="gears_circular_button_size_small">40dp</dimen>
+    <dimen name="gears_circular_button_size_medium">48dp</dimen>
+    <dimen name="gears_circular_button_size_large">64dp</dimen>
+    <dimen name="gears_circular_button_padding_xs">4dp</dimen>
+    <dimen name="gears_circular_button_padding_small">8dp</dimen>
+    <dimen name="gears_circular_button_padding_medium">8dp</dimen>
+    <dimen name="gears_circular_button_padding_large">16dp</dimen>
+
+    <dimen name="gears_card_view_elevation_none">0dp</dimen>
+    <dimen name="gears_card_view_elevation_normal">4dp</dimen>
+    <dimen name="gears_card_view_elevation_float">8dp</dimen>
+
+    <dimen name="gears_otp_radius">16dp</dimen>
+</resources>

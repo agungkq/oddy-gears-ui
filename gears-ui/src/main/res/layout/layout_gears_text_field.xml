@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.oddy.gearsui.GearsTextView
+        android:id="@+id/gtvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:size="highSpeed14" />
+
+    <com.oddy.gearsui.GearsTextView
+        android:id="@+id/gtvLabelOptional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="@string/optional"
+        android:textColor="@color/black_500"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/gtvLabel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:size="lowSpeed14" />
+
+    <com.oddy.gearsui.GearsTextView
+        android:id="@+id/gtvHelper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_500"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/gtvLabel"
+        app:layout_constraintTop_toBottomOf="@id/gtvLabel"
+        app:size="lowSpeed12" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tfRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_gears_text_field_regular"
+        android:paddingHorizontal="@dimen/gears_text_field_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gtvHelper">
+
+        <FrameLayout
+            android:id="@+id/flPrefix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gears_text_field_prefix_suffix_regular"
+            android:padding="@dimen/gears_text_field_prefix_suffix_padding"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.oddy.gearsui.GearsTextView
+                android:id="@+id/tvPrefixText"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/prefix_suffix_size"
+                android:gravity="center"
+                android:minWidth="@dimen/prefix_suffix_size"
+                android:textColor="@color/black_500"
+                app:size="highSpeed14"
+                tools:text="+62" />
+
+            <ImageView
+                android:id="@+id/ivPrefixIcon"
+                android:layout_width="@dimen/prefix_suffix_size"
+                android:layout_height="@dimen/prefix_suffix_size"
+                tools:ignore="ContentDescription" />
+
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/etTextField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/gears_text_field_content_margin"
+            android:layout_marginStart="@dimen/gears_text_field_content_margin"
+            android:layout_marginEnd="@dimen/gears_text_field_content_margin"
+            android:background="@null"
+            android:fontFamily="@font/effra"
+            android:gravity="start"
+            android:textColor="@color/black_900"
+            android:textColorHint="@color/grey_500"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/flPrefix"
+            app:layout_constraintEnd_toStartOf="@id/ivAction"
+            app:layout_constraintStart_toEndOf="@id/flPrefix"
+            app:layout_constraintTop_toTopOf="@id/flPrefix"
+            tools:hint="Halo halo bandung"
+            tools:ignore="Autofill,LabelFor,TextFields" />
+
+        <ImageView
+            android:id="@+id/ivAction"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginHorizontal="10dp"
+            android:visibility="gone"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_text_field_clear"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/flSuffix"
+            app:layout_constraintStart_toEndOf="@id/etTextField"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <FrameLayout
+            android:id="@+id/flSuffix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gears_text_field_prefix_suffix_regular"
+            android:padding="@dimen/gears_text_field_prefix_suffix_padding"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/flPrefix"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/flPrefix">
+
+            <com.oddy.gearsui.GearsTextView
+                android:id="@+id/tvSuffixText"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/prefix_suffix_size"
+                android:gravity="center"
+                android:minWidth="@dimen/prefix_suffix_size"
+                android:textColor="@color/black_500"
+                app:size="highSpeed14"
+                tools:text="+62" />
+
+            <ImageView
+                android:id="@+id/ivSuffixIcon"
+                android:layout_width="@dimen/prefix_suffix_size"
+                android:layout_height="@dimen/prefix_suffix_size"
+                android:visibility="gone"
+                tools:ignore="ContentDescription"
+                tools:text="+62" />
+
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

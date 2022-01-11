@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/bg_gears_button_disabled" android:state_enabled="false" />
+    <item>
+        <ripple android:color="@color/black_500">
+            <item>
+                <shape>
+                    <solid android:color="@color/teal" />
+                    <corners android:radius="@dimen/gears_button_corner_radius" />
+                </shape>
+            </item>
+        </ripple>
+    </item>
+</selector>

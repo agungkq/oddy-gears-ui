@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GearsTextView">
+        <attr name="size" format="enum">
+            <enum name="highSpeed30" value="0" />
+            <enum name="highSpeed24" value="1" />
+            <enum name="highSpeed20" value="2" />
+            <enum name="highSpeed18" value="3" />
+            <enum name="highSpeed16" value="4" />
+            <enum name="highSpeed14" value="5" />
+            <enum name="lowSpeed16" value="6" />
+            <enum name="lowSpeed14" value="7" />
+            <enum name="lowSpeed12" value="8" />
+        </attr>
+        <attr name="android:textColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="GearsOtpField">
+        <attr name="gof_fieldnum" format="integer" />
+        <attr name="gof_margin" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="GearsTextField">
+        <attr name="prefixText" format="string" />
+        <attr name="prefixIcon" format="reference" />
+        <attr name="suffixText" format="string" />
+        <attr name="suffixIcon" format="reference" />
+        <attr name="label" format="string" />
+        <attr name="optional" format="boolean" />
+        <attr name="helper" format="string" />
+        <attr name="labelColor" format="reference|color" />
+        <attr name="optionalColor" format="reference|color" />
+        <attr name="helperColor" format="reference|color" />
+        <attr name="enableClear" format="boolean" />
+        <attr name="android:enabled" format="boolean" />
+        <attr name="android:hint" format="string" />
+        <attr name="android:inputType" />
+        <attr name="android:minLines" />
+        <attr name="android:maxLines" />
+        <attr name="android:maxLength" />
+    </declare-styleable>
+
+    <declare-styleable name="GearsButton">
+        <attr name="gb_buttonSize" format="enum">
+            <enum name="small" value="0" />
+            <enum name="medium" value="1" />
+            <enum name="large" value="2" />
+        </attr>
+        <attr name="gb_buttonType" format="enum">
+            <enum name="filled" value="0" />
+            <enum name="outlined" value="1" />
+            <enum name="error" value="2" />
+        </attr>
+        <attr name="gb_buttonTheme" format="enum">
+            <enum name="teal" value="0" />
+            <enum name="red" value="1" />
+        </attr>
+        <attr name="android:textAlignment" format="integer">
+            <enum name="inherit" value="0" />
+            <enum name="gravity" value="1" />
+            <enum name="textStart" value="2" />
+            <enum name="textEnd" value="3" />
+            <enum name="center" value="4" />
+            <enum name="viewStart" value="5" />
+            <enum name="viewEnd" value="6" />
+        </attr>
+        <attr name="android:textColor" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="GearsToolbarTitle">
+        <attr name="title" format="string" />
+        <attr name="subtitle" format="string" />
+        <attr name="hideDrawableStart" format="boolean" />
+        <attr name="android:drawableEnd" />
+    </declare-styleable>
+
+    <declare-styleable name="GearsCardView">
+        <attr name="gcv_cornerRadius" format="enum">
+            <enum name="flatRadius" value="0" />
+            <enum name="minimalRadius" value="1" />
+            <enum name="defaultRadius" value="2" />
+            <enum name="maximalRadius" value="3" />
+        </attr>
+        <attr name="gcv_elevation" format="enum">
+            <enum name="noElevation" value="0" />
+            <enum name="normalElevation" value="1" />
+            <enum name="floatElevation" value="2" />
+        </attr>
+        <attr name="gcv_isBordered" format="boolean" />
+    </declare-styleable>
+</resources>

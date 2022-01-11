@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="@drawable/bg_gears_toolbar"
+    app:contentInsetEnd="30dp"
+    app:contentInsetStart="30dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/vHomeInitialStroke"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_home_avatar_stroke"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.oddy.gearsui.GearsTextView
+            android:id="@+id/gtvHomeInitial"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/vHomeInitialStroke"
+            app:layout_constraintEnd_toEndOf="@id/vHomeInitialStroke"
+            app:layout_constraintStart_toStartOf="@id/vHomeInitialStroke"
+            app:layout_constraintTop_toTopOf="@id/vHomeInitialStroke"
+            app:size="highSpeed16"
+            tools:text="PS" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/ivMyAccountAvatarShimmer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_default_shimmer_circle"
+                tools:ignore="ContentDescription" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivToolbarAvatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_home_avatar_stroke"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_not_logged_in"
+            app:contentPadding="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/GearsCircleImage"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/ivToolbarBrand"
+            android:layout_width="95dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_brand"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvToolbarNotificationAvatarIndicator"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/bg_notification_indicator"
+            android:fontFamily="@font/effra"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:translationX="4dp"
+            android:translationY="4dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/ivToolbarAvatar"
+            app:layout_constraintEnd_toEndOf="@id/ivToolbarAvatar"
+            tools:ignore="ContentDescription,SmallSp"
+            tools:text="4"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/ivToolbarNotification"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?selectableItemBackground"
+            android:src="@drawable/ic_notification"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvToolbarNotificationIndicator"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/bg_notification_indicator"
+            android:fontFamily="@font/effra"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/ivToolbarNotification"
+            app:layout_constraintTop_toTopOf="@id/ivToolbarNotification"
+            tools:ignore="ContentDescription,SmallSp"
+            tools:text="4"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.Toolbar>
