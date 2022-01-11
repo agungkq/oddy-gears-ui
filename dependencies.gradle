@@ -2,7 +2,7 @@ ext {
     composeUiVersion = "1.0.4"
 
     plugins = [
-            android_gradle: "com.android.tools.build:gradle:7.0.4",
+            android_gradle: "com.android.tools.build:gradle:7.0.2",
             kotlin        : "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
     ]
 
