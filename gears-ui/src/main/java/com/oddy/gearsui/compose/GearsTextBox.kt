@@ -3,12 +3,14 @@ package com.oddy.gearsui.compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,17 +18,19 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oddy.gearsui.R
+import kotlinx.coroutines.flow.collect
 
 @Composable
 fun GearsTextBox(
@@ -43,9 +47,15 @@ fun GearsTextBox(
     hasClearAction: Boolean = false,
     isEnabled: Boolean = true,
     singleLine: Boolean = true,
+    readOnly: Boolean = false,
     contentAlignment: Alignment = Alignment.CenterStart,
-    value: String = "",
-    onValueChanged: (String) -> Unit,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    textFieldValue: TextFieldValue? = null,
+    onTextFieldValueChanged: ((TextFieldValue) -> Unit)? = null,
+    value: String? = null,
+    onValueChanged: ((String) -> Unit)? = null,
+    onClick: (() -> Unit)? = null,
 ) {
     var isFocused by remember { mutableStateOf(false) }
     val focusRequester = FocusRequester()
@@ -112,11 +122,6 @@ fun GearsTextBox(
         else -> colorResource(id = R.color.white)
     }
 
-    val backgroundColor = when {
-        isEnabled -> colorResource(id = R.color.white)
-        else -> colorResource(id = R.color.monochrome_400)
-    }
-
     Column(
         modifier = modifier.onFocusChanged {
             isFocused = it.isFocused || it.hasFocus
@@ -136,7 +141,7 @@ fun GearsTextBox(
                         type = GearsTextType.Body14,
                         fontStyle = FontStyle.Italic,
                         textColor = colorResource(id = R.color.monochrome_600),
-                        modifier = Modifier.padding(start = 2.dp)
+                        modifier = Modifier.padding(start = 2.dp, bottom = 2.dp)
                     )
                 }
             }
@@ -152,7 +157,7 @@ fun GearsTextBox(
                 text = helper,
                 type = GearsTextType.Body14,
                 textColor = helperColor,
-                modifier = Modifier.padding(top = 2.dp, bottom = 5.dp)
+                modifier = Modifier.padding(bottom = 5.dp)
             )
         }
 
@@ -211,40 +216,101 @@ fun GearsTextBox(
                 textAlign = TextAlign.Center
             )
 
-            BasicTextField(
-                modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .weight(1f)
-                    .focusRequester(focusRequester),
-                value = value,
-                enabled = isEnabled,
-                onValueChange = onValueChanged,
-                singleLine = singleLine,
-                cursorBrush = SolidColor(MaterialTheme.colors.primary),
-                textStyle = textStyle,
-                decorationBox = { innerTextField ->
-                    Box(
-                        modifier = Modifier.weight(1f),
-                        contentAlignment = contentAlignment
-                    ) {
-                        if (value.isEmpty() && placeholder != null) GearsText(
-                            text = placeholder,
-                            type = GearsTextType.Body14,
-                            textColor = placeHolderColor
-                        )
+            val textFieldModifier = Modifier
+                .padding(horizontal = 10.dp)
+                .weight(1f)
+                .focusRequester(focusRequester)
 
-                        innerTextField()
+            if (textFieldValue != null && onTextFieldValueChanged != null) {
+                BasicTextField(
+                    modifier = textFieldModifier,
+                    value = textFieldValue,
+                    enabled = isEnabled,
+                    onValueChange = onTextFieldValueChanged,
+                    visualTransformation = visualTransformation,
+                    singleLine = singleLine,
+                    textStyle = textStyle,
+                    keyboardOptions = keyboardOptions,
+                    readOnly = readOnly,
+                    interactionSource = remember { MutableInteractionSource() }
+                        .also { interactionSource ->
+                            if (onClick == null) return@also
+                            LaunchedEffect(interactionSource) {
+                                interactionSource.interactions.collect {
+                                    if (it is PressInteraction.Release) {
+                                        onClick()
+                                    }
+                                }
+                            }
+                        },
+                    decorationBox = { innerTextField ->
+                        Box(
+                            modifier = Modifier.weight(1f),
+                            contentAlignment = contentAlignment
+                        ) {
+                            if (textFieldValue.text.isEmpty() && placeholder != null) GearsText(
+                                text = placeholder,
+                                type = GearsTextType.Body14,
+                                textColor = placeHolderColor
+                            )
+
+                            innerTextField()
+                        }
                     }
-                }
-            )
+                )
+            } else if (value != null && onValueChanged != null) {
+                BasicTextField(
+                    modifier = textFieldModifier,
+                    value = value,
+                    enabled = isEnabled,
+                    onValueChange = onValueChanged,
+                    visualTransformation = visualTransformation,
+                    singleLine = singleLine,
+                    textStyle = textStyle,
+                    keyboardOptions = keyboardOptions,
+                    readOnly = readOnly,
+                    interactionSource = remember { MutableInteractionSource() }
+                        .also { interactionSource ->
+                            if (onClick == null) return@also
+                            LaunchedEffect(interactionSource) {
+                                interactionSource.interactions.collect {
+                                    if (it is PressInteraction.Release) {
+                                        onClick()
+                                    }
+                                }
+                            }
+                        },
+                    decorationBox = { innerTextField ->
+                        Box(
+                            modifier = Modifier.weight(1f),
+                            contentAlignment = contentAlignment
+                        ) {
+                            if (value.isEmpty() && placeholder != null) GearsText(
+                                text = placeholder,
+                                type = GearsTextType.Body14,
+                                textColor = placeHolderColor
+                            )
 
-            if (hasClearAction && value.isNotEmpty()) {
+                            innerTextField()
+                        }
+                    }
+                )
+            }
+
+            if (hasClearAction
+                && (!value.isNullOrEmpty() || !textFieldValue?.text.isNullOrEmpty())
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_text_field_clear),
                     contentDescription = "Clear",
                     modifier = Modifier
                         .padding(end = 10.dp)
-                        .clickable { onValueChanged("") },
+                        .clickable {
+                            if (onValueChanged != null) onValueChanged("")
+                            else if (onTextFieldValueChanged != null) {
+                                onTextFieldValueChanged(TextFieldValue())
+                            }
+                        },
                     tint = Color.Unspecified,
                 )
             }
