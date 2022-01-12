@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -41,7 +42,8 @@ fun GearsText(
     letterSpacing: TextUnit = 0.sp,
     lineHeight: TextUnit? = null,
     fontWeight: FontWeight? = null,
-    maxLines: Int = Int.MAX_VALUE
+    maxLines: Int = Int.MAX_VALUE,
+    fontStyle: FontStyle = FontStyle.Normal,
 ) {
     Text(
         modifier = modifier,
@@ -54,6 +56,7 @@ fun GearsText(
         textAlign = textAlign,
         letterSpacing = letterSpacing,
         maxLines = maxLines,
-        overflow = TextOverflow.Ellipsis
+        overflow = TextOverflow.Ellipsis,
+        fontStyle = fontStyle
     )
 }
