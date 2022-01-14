@@ -28,7 +28,7 @@ sealed class GearsTextType(
     object Heading14 : GearsTextType(14.sp, 18.sp, FontWeight.Bold)
     object Body16 : GearsTextType(16.sp, 20.sp)
     object Body14 : GearsTextType(14.sp, 18.sp)
-    object Body12 : GearsTextType(12.sp, 24.sp)
+    object Body12 : GearsTextType(12.sp, 14.sp)
 }
 
 @Composable
