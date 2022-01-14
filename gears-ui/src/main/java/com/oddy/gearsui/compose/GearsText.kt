@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -34,6 +35,36 @@ sealed class GearsTextType(
 @Composable
 fun GearsText(
     text: String,
+    modifier: Modifier = Modifier,
+    textSize: TextUnit? = null,
+    textColor: Color = colorResource(id = R.color.black_900),
+    type: GearsTextType = GearsTextType.Body14,
+    textAlign: TextAlign? = null,
+    letterSpacing: TextUnit = 0.sp,
+    lineHeight: TextUnit? = null,
+    fontWeight: FontWeight? = null,
+    maxLines: Int = Int.MAX_VALUE,
+    fontStyle: FontStyle = FontStyle.Normal,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        color = textColor,
+        fontSize = textSize ?: type.textSize,
+        lineHeight = lineHeight ?: type.lineHeight,
+        fontWeight = fontWeight ?: type.fontWeight,
+        fontFamily = FontFamily(Font(resId = R.font.effra)),
+        textAlign = textAlign,
+        letterSpacing = letterSpacing,
+        maxLines = maxLines,
+        overflow = TextOverflow.Ellipsis,
+        fontStyle = fontStyle
+    )
+}
+
+@Composable
+fun GearsText(
+    text: AnnotatedString,
     modifier: Modifier = Modifier,
     textSize: TextUnit? = null,
     textColor: Color = colorResource(id = R.color.black_900),
