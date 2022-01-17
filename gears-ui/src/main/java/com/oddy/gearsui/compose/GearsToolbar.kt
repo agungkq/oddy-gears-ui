@@ -3,6 +3,7 @@ package com.oddy.gearsui.compose
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -65,7 +66,9 @@ fun GearsToolbar(
     modifier: Modifier = Modifier,
     variant: GearsToolbarVariant,
     title: String? = null,
-    count: Int? = null
+    count: Int? = null,
+    onButtonDrawableStartClicked: (() -> Unit)? = null,
+    onButtonDrawableEndClicked: (() -> Unit)? = null
 ) {
     val backgroundColor =
         if (variant is GearsToolbarVariant.VariantDark) colorResource(id = R.color.black_900)
@@ -93,10 +96,12 @@ fun GearsToolbar(
             .padding(horizontal = 30.dp)
     ) {
         Icon(
-            modifier = Modifier.align(Alignment.CenterStart),
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .clickable { onButtonDrawableStartClicked?.invoke() },
             painter = painterResource(id = R.drawable.ic_arrow_left),
             contentDescription = "arrow_left",
-            tint = tintColor
+            tint = tintColor,
         )
 
         if (variant is GearsToolbarVariant.VariantLight) {
@@ -120,15 +125,19 @@ fun GearsToolbar(
                 val painter =
                     painterResource(id = (variant.extraDrawable as GearsToolbarVariant.ExtraDrawable.DrawableEnd).drawableEnd)
                 Image(
-                    modifier = Modifier.align(Alignment.CenterEnd),
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .clickable { onButtonDrawableEndClicked?.invoke() },
                     painter = painter,
                     contentDescription = "drawable_end"
                 )
             }
             is GearsToolbarVariant.ExtraDrawable.DrawableEndWithDot -> {
                 GearsImageWithIndicator(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .clickable { onButtonDrawableEndClicked?.invoke() },
                     variant = (variant.extraDrawable as GearsToolbarVariant.ExtraDrawable.DrawableEndWithDot).gearsImageWithIndicatorVariant,
-                    modifier = Modifier.align(Alignment.CenterEnd),
                     count = count
                 )
             }
