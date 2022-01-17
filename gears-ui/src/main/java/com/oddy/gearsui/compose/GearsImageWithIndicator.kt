@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.oddy.gearsui.R
 
-sealed class GearsImageWithIndicatorVariant(val painter: Painter, val alignDot: Alignment) {
+sealed class GearsImageWithIndicatorVariant(val painter: Painter, val alignIndicator: Alignment) {
     data class AlignmentTopStart(val vPainter: Painter) :
         GearsImageWithIndicatorVariant(vPainter, Alignment.TopStart)
 
@@ -40,13 +40,13 @@ fun GearsImageWithIndicator(
 ) {
     Box(modifier = modifier) {
         Image(painter = variant.painter, contentDescription = "image")
-        CountIndicator(modifier = Modifier.align(variant.alignDot), count = count)
+        CountIndicator(modifier = Modifier.align(variant.alignIndicator), count = count)
     }
 }
 
 @Preview
 @Composable
-fun GearsImageDotPreview() {
+fun GearsImageWithIndicatorPreview() {
     Column {
         Row {
             GearsImageWithIndicator(

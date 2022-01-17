@@ -24,7 +24,7 @@ sealed class GearsToolbarVariant {
     sealed class ExtraDrawable {
         object NoDrawableEnd : ExtraDrawable()
         data class DrawableEnd(@DrawableRes val drawableEnd: Int) : ExtraDrawable()
-        data class DrawableEndWithDot(val gearsImageWithIndicatorVariant: GearsImageWithIndicatorVariant) :
+        data class DrawableEndWithIndicator(val gearsImageWithIndicatorVariant: GearsImageWithIndicatorVariant) :
             ExtraDrawable()
     }
 
@@ -35,7 +35,7 @@ sealed class GearsToolbarVariant {
         init {
             extraDrawable = when {
                 vDrawableEnd == null && vGearsImageWithIndicatorVariantEnd == null -> ExtraDrawable.NoDrawableEnd
-                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithDot(
+                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithIndicator(
                     vGearsImageWithIndicatorVariantEnd
                 )
                 vDrawableEnd != null -> ExtraDrawable.DrawableEnd(vDrawableEnd)
@@ -51,7 +51,7 @@ sealed class GearsToolbarVariant {
         init {
             extraDrawable = when {
                 vDrawableEnd == null && vGearsImageWithIndicatorVariantEnd == null -> ExtraDrawable.NoDrawableEnd
-                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithDot(
+                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithIndicator(
                     vGearsImageWithIndicatorVariantEnd
                 )
                 vDrawableEnd != null -> ExtraDrawable.DrawableEnd(vDrawableEnd)
@@ -132,12 +132,12 @@ fun GearsToolbar(
                     contentDescription = "drawable_end"
                 )
             }
-            is GearsToolbarVariant.ExtraDrawable.DrawableEndWithDot -> {
+            is GearsToolbarVariant.ExtraDrawable.DrawableEndWithIndicator -> {
                 GearsImageWithIndicator(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
                         .clickable { onButtonDrawableEndClicked?.invoke() },
-                    variant = (variant.extraDrawable as GearsToolbarVariant.ExtraDrawable.DrawableEndWithDot).gearsImageWithIndicatorVariant,
+                    variant = (variant.extraDrawable as GearsToolbarVariant.ExtraDrawable.DrawableEndWithIndicator).gearsImageWithIndicatorVariant,
                     count = count
                 )
             }
