@@ -23,19 +23,19 @@ sealed class GearsToolbarVariant {
     sealed class ExtraDrawable {
         object NoDrawableEnd : ExtraDrawable()
         data class DrawableEnd(@DrawableRes val drawableEnd: Int) : ExtraDrawable()
-        data class DrawableEndWithDot(val gearsImageDotVariant: GearsImageDotVariant) :
+        data class DrawableEndWithDot(val gearsImageWithIndicatorVariant: GearsImageWithIndicatorVariant) :
             ExtraDrawable()
     }
 
     data class VariantLight(
         @DrawableRes val vDrawableEnd: Int? = null,
-        val vGearsImageDotVariantEnd: GearsImageDotVariant? = null
+        val vGearsImageWithIndicatorVariantEnd: GearsImageWithIndicatorVariant? = null
     ) : GearsToolbarVariant() {
         init {
             extraDrawable = when {
-                vDrawableEnd == null && vGearsImageDotVariantEnd == null -> ExtraDrawable.NoDrawableEnd
-                vGearsImageDotVariantEnd != null -> ExtraDrawable.DrawableEndWithDot(
-                    vGearsImageDotVariantEnd
+                vDrawableEnd == null && vGearsImageWithIndicatorVariantEnd == null -> ExtraDrawable.NoDrawableEnd
+                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithDot(
+                    vGearsImageWithIndicatorVariantEnd
                 )
                 vDrawableEnd != null -> ExtraDrawable.DrawableEnd(vDrawableEnd)
                 else -> ExtraDrawable.NoDrawableEnd
@@ -45,13 +45,13 @@ sealed class GearsToolbarVariant {
 
     data class VariantDark(
         @DrawableRes val vDrawableEnd: Int? = null,
-        val vGearsImageDotVariantEnd: GearsImageDotVariant? = null
+        val vGearsImageWithIndicatorVariantEnd: GearsImageWithIndicatorVariant? = null
     ) : GearsToolbarVariant() {
         init {
             extraDrawable = when {
-                vDrawableEnd == null && vGearsImageDotVariantEnd == null -> ExtraDrawable.NoDrawableEnd
-                vGearsImageDotVariantEnd != null -> ExtraDrawable.DrawableEndWithDot(
-                    vGearsImageDotVariantEnd
+                vDrawableEnd == null && vGearsImageWithIndicatorVariantEnd == null -> ExtraDrawable.NoDrawableEnd
+                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithDot(
+                    vGearsImageWithIndicatorVariantEnd
                 )
                 vDrawableEnd != null -> ExtraDrawable.DrawableEnd(vDrawableEnd)
                 else -> ExtraDrawable.NoDrawableEnd
@@ -126,8 +126,8 @@ fun GearsToolbar(
                 )
             }
             is GearsToolbarVariant.ExtraDrawable.DrawableEndWithDot -> {
-                GearsImageDot(
-                    variant = (variant.extraDrawable as GearsToolbarVariant.ExtraDrawable.DrawableEndWithDot).gearsImageDotVariant,
+                GearsImageWithIndicator(
+                    variant = (variant.extraDrawable as GearsToolbarVariant.ExtraDrawable.DrawableEndWithDot).gearsImageWithIndicatorVariant,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     count = count
                 )
@@ -151,7 +151,7 @@ fun PreviewGearsToolbar() {
         GearsToolbar(
             modifier = Modifier.padding(vertical = 5.dp),
             variant = GearsToolbarVariant.VariantDark(
-                vGearsImageDotVariantEnd = GearsImageDotVariant.AlignmentTopEnd(
+                vGearsImageWithIndicatorVariantEnd = GearsImageWithIndicatorVariant.AlignmentTopEnd(
                     painterResource(id = R.drawable.ic_notification)
                 )
             ),
@@ -168,7 +168,7 @@ fun PreviewGearsToolbar() {
         GearsToolbar(
             modifier = Modifier.padding(vertical = 5.dp),
             variant = GearsToolbarVariant.VariantLight(
-                vGearsImageDotVariantEnd = GearsImageDotVariant.AlignmentTopEnd(
+                vGearsImageWithIndicatorVariantEnd = GearsImageWithIndicatorVariant.AlignmentTopEnd(
                     painterResource(id = R.drawable.ic_notification)
                 )
             ),

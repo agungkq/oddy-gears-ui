@@ -12,30 +12,30 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.oddy.gearsui.R
 
-sealed class GearsImageDotVariant(val painter: Painter, val alignDot: Alignment) {
+sealed class GearsImageWithIndicatorVariant(val painter: Painter, val alignDot: Alignment) {
     data class AlignmentTopStart(val vPainter: Painter) :
-        GearsImageDotVariant(vPainter, Alignment.TopStart)
+        GearsImageWithIndicatorVariant(vPainter, Alignment.TopStart)
 
     data class AlignmentTopEnd(val vPainter: Painter) :
-        GearsImageDotVariant(vPainter, Alignment.TopEnd)
+        GearsImageWithIndicatorVariant(vPainter, Alignment.TopEnd)
 
     data class AlignmentTopCenter(val vPainter: Painter) :
-        GearsImageDotVariant(vPainter, Alignment.TopCenter)
+        GearsImageWithIndicatorVariant(vPainter, Alignment.TopCenter)
 
     data class AlignmentBottomStart(val vPainter: Painter) :
-        GearsImageDotVariant(vPainter, Alignment.BottomStart)
+        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomStart)
 
     data class AlignmentBottomEnd(val vPainter: Painter) :
-        GearsImageDotVariant(vPainter, Alignment.BottomEnd)
+        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomEnd)
 
     data class AlignmentBottomCenter(val vPainter: Painter) :
-        GearsImageDotVariant(vPainter, Alignment.BottomCenter)
+        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomCenter)
 }
 
 @Composable
-fun GearsImageDot(
+fun GearsImageWithIndicator(
     modifier: Modifier = Modifier,
-    variant: GearsImageDotVariant,
+    variant: GearsImageWithIndicatorVariant,
     count: Int? = null,
 ) {
     Box(modifier = modifier) {
@@ -49,68 +49,68 @@ fun GearsImageDot(
 fun GearsImageDotPreview() {
     Column {
         Row {
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentTopStart(painterResource(id = R.drawable.ic_notification))
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentTopStart(painterResource(id = R.drawable.ic_notification))
             )
 
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentTopStart(painterResource(id = R.drawable.ic_notification)),
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentTopStart(painterResource(id = R.drawable.ic_notification)),
                 count = 99
             )
         }
 
         Row {
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentTopCenter(painterResource(id = R.drawable.ic_notification))
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentTopCenter(painterResource(id = R.drawable.ic_notification))
             )
 
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentTopCenter(painterResource(id = R.drawable.ic_notification)),
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentTopCenter(painterResource(id = R.drawable.ic_notification)),
                 count = 99
             )
         }
 
         Row {
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentTopEnd(painterResource(id = R.drawable.ic_notification))
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentTopEnd(painterResource(id = R.drawable.ic_notification))
             )
 
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentTopEnd(painterResource(id = R.drawable.ic_notification)),
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentTopEnd(painterResource(id = R.drawable.ic_notification)),
                 count = 99
             )
         }
 
 
         Row {
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentBottomStart(painterResource(id = R.drawable.ic_notification))
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentBottomStart(painterResource(id = R.drawable.ic_notification))
             )
 
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentBottomStart(painterResource(id = R.drawable.ic_notification)),
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentBottomStart(painterResource(id = R.drawable.ic_notification)),
                 count = 99
             )
         }
 
         Row {
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentBottomCenter(painterResource(id = R.drawable.ic_notification))
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentBottomCenter(painterResource(id = R.drawable.ic_notification))
             )
 
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentBottomCenter(painterResource(id = R.drawable.ic_notification)),
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentBottomCenter(painterResource(id = R.drawable.ic_notification)),
                 count = 99
             )
         }
 
         Row {
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentBottomEnd(painterResource(id = R.drawable.ic_notification))
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentBottomEnd(painterResource(id = R.drawable.ic_notification))
             )
 
-            GearsImageDot(
-                variant = GearsImageDotVariant.AlignmentBottomEnd(painterResource(id = R.drawable.ic_notification)),
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentBottomEnd(painterResource(id = R.drawable.ic_notification)),
                 count = 99
             )
         }
