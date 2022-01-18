@@ -18,8 +18,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.oddy.gearsui.R
 
-sealed class GearsToolbarVariant {
-    var extraDrawable: ExtraDrawable? = null
+sealed class GearsToolbarVariant(
+    @DrawableRes private val drawableEnd: Int?,
+    private val gearsImageWithIndicatorVariant: GearsImageWithIndicatorVariant?
+) {
 
     sealed class ExtraDrawable {
         object NoDrawableEnd : ExtraDrawable()
@@ -28,53 +30,31 @@ sealed class GearsToolbarVariant {
             ExtraDrawable()
     }
 
+    val extraDrawable by lazy {
+        when {
+            drawableEnd == null && gearsImageWithIndicatorVariant == null -> ExtraDrawable.NoDrawableEnd
+            gearsImageWithIndicatorVariant != null -> ExtraDrawable.DrawableEndWithIndicator(
+                gearsImageWithIndicatorVariant
+            )
+            drawableEnd != null -> ExtraDrawable.DrawableEnd(drawableEnd)
+            else -> ExtraDrawable.NoDrawableEnd
+        }
+    }
+
     data class VariantLight(
         @DrawableRes val vDrawableEnd: Int? = null,
         val vGearsImageWithIndicatorVariantEnd: GearsImageWithIndicatorVariant? = null
-    ) : GearsToolbarVariant() {
-        init {
-            extraDrawable = when {
-                vDrawableEnd == null && vGearsImageWithIndicatorVariantEnd == null -> ExtraDrawable.NoDrawableEnd
-                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithIndicator(
-                    vGearsImageWithIndicatorVariantEnd
-                )
-                vDrawableEnd != null -> ExtraDrawable.DrawableEnd(vDrawableEnd)
-                else -> ExtraDrawable.NoDrawableEnd
-            }
-        }
-    }
+    ) : GearsToolbarVariant(vDrawableEnd, vGearsImageWithIndicatorVariantEnd)
 
     data class VariantDark(
         @DrawableRes val vDrawableEnd: Int? = null,
         val vGearsImageWithIndicatorVariantEnd: GearsImageWithIndicatorVariant? = null
-    ) : GearsToolbarVariant() {
-        init {
-            extraDrawable = when {
-                vDrawableEnd == null && vGearsImageWithIndicatorVariantEnd == null -> ExtraDrawable.NoDrawableEnd
-                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithIndicator(
-                    vGearsImageWithIndicatorVariantEnd
-                )
-                vDrawableEnd != null -> ExtraDrawable.DrawableEnd(vDrawableEnd)
-                else -> ExtraDrawable.NoDrawableEnd
-            }
-        }
-    }
+    ) : GearsToolbarVariant(vDrawableEnd, vGearsImageWithIndicatorVariantEnd)
 
     data class VariantTransparent(
         @DrawableRes val vDrawableEnd: Int? = null,
         val vGearsImageWithIndicatorVariantEnd: GearsImageWithIndicatorVariant? = null
-    ) : GearsToolbarVariant() {
-        init {
-            extraDrawable = when {
-                vDrawableEnd == null && vGearsImageWithIndicatorVariantEnd == null -> ExtraDrawable.NoDrawableEnd
-                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithIndicator(
-                    vGearsImageWithIndicatorVariantEnd
-                )
-                vDrawableEnd != null -> ExtraDrawable.DrawableEnd(vDrawableEnd)
-                else -> ExtraDrawable.NoDrawableEnd
-            }
-        }
-    }
+    ) : GearsToolbarVariant(vDrawableEnd, vGearsImageWithIndicatorVariantEnd)
 }
 
 @Composable
@@ -122,7 +102,7 @@ fun GearsToolbar(
             tint = tintColor,
         )
 
-        if (variant is GearsToolbarVariant.VariantLight) {
+        if (variant is GearsToolbarVariant.VariantLight || variant is GearsToolbarVariant.VariantTransparent) {
             GearsText(
                 modifier = Modifier.align(Alignment.Center),
                 text = title.orEmpty(),
@@ -230,6 +210,17 @@ fun PreviewGearsToolbar() {
                 .padding(vertical = 5.dp)
                 .background(Color.Red),
             variant = GearsToolbarVariant.VariantTransparent()
+        )
+
+        GearsToolbar(
+            modifier = Modifier.padding(vertical = 5.dp),
+            variant = GearsToolbarVariant.VariantTransparent(
+                vGearsImageWithIndicatorVariantEnd = GearsImageWithIndicatorVariant.AlignmentTopEnd(
+                    painterResource(id = R.drawable.ic_notification)
+                )
+            ),
+            title = "List kendaraan",
+            count = 30
         )
     }
 }
