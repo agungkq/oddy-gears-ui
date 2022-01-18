@@ -59,6 +59,22 @@ sealed class GearsToolbarVariant {
             }
         }
     }
+
+    data class VariantTransparent(
+        @DrawableRes val vDrawableEnd: Int? = null,
+        val vGearsImageWithIndicatorVariantEnd: GearsImageWithIndicatorVariant? = null
+    ) : GearsToolbarVariant() {
+        init {
+            extraDrawable = when {
+                vDrawableEnd == null && vGearsImageWithIndicatorVariantEnd == null -> ExtraDrawable.NoDrawableEnd
+                vGearsImageWithIndicatorVariantEnd != null -> ExtraDrawable.DrawableEndWithIndicator(
+                    vGearsImageWithIndicatorVariantEnd
+                )
+                vDrawableEnd != null -> ExtraDrawable.DrawableEnd(vDrawableEnd)
+                else -> ExtraDrawable.NoDrawableEnd
+            }
+        }
+    }
 }
 
 @Composable
@@ -71,9 +87,11 @@ fun GearsToolbar(
     onButtonDrawableEndClicked: (() -> Unit)? = null
 ) {
     val backgroundColor =
-        if (variant is GearsToolbarVariant.VariantDark) colorResource(id = R.color.black_900)
-        else colorResource(id = R.color.white)
-
+        when (variant) {
+            is GearsToolbarVariant.VariantDark -> colorResource(id = R.color.black_900)
+            is GearsToolbarVariant.VariantLight -> colorResource(id = R.color.white)
+            else -> Color.Transparent
+        }
     val tintColor =
         if (variant is GearsToolbarVariant.VariantDark)
             colorResource(id = R.color.white)
@@ -205,6 +223,13 @@ fun PreviewGearsToolbar() {
         GearsToolbar(
             modifier = Modifier.padding(vertical = 5.dp),
             variant = GearsToolbarVariant.VariantDark()
+        )
+
+        GearsToolbar(
+            modifier = Modifier
+                .padding(vertical = 5.dp)
+                .background(Color.Red),
+            variant = GearsToolbarVariant.VariantTransparent()
         )
     }
 }
