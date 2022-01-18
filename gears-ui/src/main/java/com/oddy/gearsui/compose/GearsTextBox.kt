@@ -43,6 +43,7 @@ fun GearsTextBox(
     label: String? = null,
     isOptional: Boolean = false,
     isError: Boolean = false,
+    errorMessage: String? = null,
     helper: String? = null,
     hasClearAction: Boolean = false,
     isEnabled: Boolean = true,
@@ -70,6 +71,17 @@ fun GearsTextBox(
                 color = colorResource(id = R.color.monochrome_400),
                 shape = RoundedCornerShape(16.dp)
             )
+    } else if (isError || errorMessage != null) {
+        Modifier
+            .background(
+                color = colorResource(id = R.color.white),
+                shape = RoundedCornerShape(16.dp)
+            )
+            .border(
+                width = 1.dp,
+                color = colorResource(id = R.color.ui_red),
+                shape = RoundedCornerShape(16.dp)
+            )
     } else if (isFocused) {
         Modifier
             .background(
@@ -79,17 +91,6 @@ fun GearsTextBox(
             .border(
                 width = 1.dp,
                 color = colorResource(id = R.color.turqoise),
-                shape = RoundedCornerShape(16.dp)
-            )
-    } else if (isError) {
-        Modifier
-            .background(
-                color = colorResource(id = R.color.white),
-                shape = RoundedCornerShape(16.dp)
-            )
-            .border(
-                width = 1.dp,
-                color = colorResource(id = R.color.ui_red),
                 shape = RoundedCornerShape(16.dp)
             )
     } else {
@@ -106,19 +107,19 @@ fun GearsTextBox(
     }
 
     val suffixPrefixColor = when {
+        isError || errorMessage != null -> colorResource(id = R.color.ui_red)
         isFocused -> colorResource(id = R.color.teal)
-        isError -> colorResource(id = R.color.ui_red)
         else -> colorResource(id = R.color.monochrome_600)
     }
 
     val textColor = when {
-        isError -> colorResource(id = R.color.ui_red)
+        isError || errorMessage != null -> colorResource(id = R.color.ui_red)
         else -> colorResource(id = R.color.monochrome_800)
     }
 
     val placeHolderColor = when {
         isEnabled -> colorResource(id = R.color.monochrome_400)
-        isError -> colorResource(id = R.color.ui_red)
+        isError || errorMessage != null -> colorResource(id = R.color.ui_red)
         else -> colorResource(id = R.color.white)
     }
 
@@ -147,14 +148,14 @@ fun GearsTextBox(
             }
         }
 
-        if (helper != null) {
+        if (helper != null || errorMessage != null) {
             val helperColor = when {
-                isError -> colorResource(id = R.color.ui_red)
+                isError || errorMessage != null -> colorResource(id = R.color.ui_red)
                 else -> colorResource(id = R.color.monochrome_600)
             }
 
             GearsText(
-                text = helper,
+                text = errorMessage ?: helper.orEmpty(),
                 type = GearsTextType.Body14,
                 textColor = helperColor,
                 modifier = Modifier.padding(bottom = 5.dp)
@@ -634,7 +635,7 @@ private fun GearsTextBoxWithLabel() {
             placeholder = "Lorem ipsum dolor sit amet",
             label = "Label",
             isOptional = true,
-            isError = true,
+            errorMessage = "Error mas",
             helper = "Helper text"
         ) {}
     }
