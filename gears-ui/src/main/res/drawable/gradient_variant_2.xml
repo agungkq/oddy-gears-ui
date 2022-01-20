@@ -2,11 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
         android:centerColor="@color/teal"
-        android:endColor="@color/prussian"
-        android:endX="60"
-        android:endY="40"
+        android:endColor="@color/grey_blue"
         android:startColor="@color/teal"
-        android:startX="20"
-        android:startY="40"
         android:type="linear" />
 </shape>

@@ -3,10 +3,6 @@
     <gradient
         android:centerColor="@color/dark_cyan"
         android:endColor="@color/teal"
-        android:endX="60"
-        android:endY="40"
         android:startColor="@color/prussian"
-        android:startX="20"
-        android:startY="40"
         android:type="linear" />
 </shape>
