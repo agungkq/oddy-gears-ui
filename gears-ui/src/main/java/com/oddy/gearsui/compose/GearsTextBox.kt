@@ -130,7 +130,12 @@ fun GearsTextBox(
         }
     ) {
         if (label != null) {
-            Row {
+            val labelRowModifier =
+                if (helper == null) Modifier.padding(bottom = 5.dp)
+                else Modifier
+            Row(
+                modifier = labelRowModifier
+            ) {
                 GearsText(
                     text = label,
                     type = GearsTextType.Heading14,
