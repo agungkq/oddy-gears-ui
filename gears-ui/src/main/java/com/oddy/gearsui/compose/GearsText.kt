@@ -1,5 +1,6 @@
 package com.oddy.gearsui.compose
 
+import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -75,6 +76,7 @@ fun GearsText(
     fontWeight: FontWeight? = null,
     maxLines: Int = Int.MAX_VALUE,
     fontStyle: FontStyle = FontStyle.Normal,
+    inlineContent: Map<String, InlineTextContent>
 ) {
     Text(
         modifier = modifier,
@@ -88,6 +90,7 @@ fun GearsText(
         letterSpacing = letterSpacing,
         maxLines = maxLines,
         overflow = TextOverflow.Ellipsis,
-        fontStyle = fontStyle
+        fontStyle = fontStyle,
+        inlineContent = inlineContent
     )
 }
