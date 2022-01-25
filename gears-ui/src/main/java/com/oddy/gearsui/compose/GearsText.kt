@@ -76,7 +76,7 @@ fun GearsText(
     fontWeight: FontWeight? = null,
     maxLines: Int = Int.MAX_VALUE,
     fontStyle: FontStyle = FontStyle.Normal,
-    inlineContent: Map<String, InlineTextContent>
+    inlineContent: Map<String, InlineTextContent> = mapOf()
 ) {
     Text(
         modifier = modifier,
