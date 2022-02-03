@@ -51,6 +51,7 @@ dependencies {
     implementation "$libs.activity_compose"
     implementation "$libs.viewmodel_compose"
     implementation "$libs.coil"
+    implementation "$libs.paging"
 }
 
 afterEvaluate {
