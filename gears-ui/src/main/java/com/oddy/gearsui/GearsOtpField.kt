@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.core.widget.doOnTextChanged
 
@@ -27,7 +28,18 @@ class GearsOtpField @JvmOverloads constructor(
     var invalid = false
         set(value) {
             field = value
-            buildItems()
+            val backgroundDrawable =
+                if (field) R.drawable.bg_gears_otp_error
+                else R.drawable.bg_gears_otp_bg
+            val textColor =
+                if (field) R.color.ui_red
+                else R.color.black_900
+            children.forEach {
+                (it as GearsOtpEditText).run {
+                    setBackgroundResource(backgroundDrawable)
+                    setTextColor(ContextCompat.getColor(context, textColor))
+                }
+            }
         }
 
     private fun initAttributes(context: Context, attrs: AttributeSet?) {
@@ -59,10 +71,6 @@ class GearsOtpField @JvmOverloads constructor(
             val view = LayoutInflater.from(context)
                 .inflate(R.layout.layout_gears_otp_field_item, this, false) as GearsOtpEditText
 
-            val backgroundDrawable =
-                if (invalid) R.drawable.bg_gears_otp_error
-                else R.drawable.bg_gears_otp_bg
-            view.setBackgroundResource(backgroundDrawable)
             view.doOnTextChanged { _, _, before, count -> onTextChanged(before, count, i) }
             view.setOnKeyListener { _, _, event ->
                 if (onKeyBackwardCheck(event, i)) {
