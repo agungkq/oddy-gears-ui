@@ -95,6 +95,7 @@ class GearsOtpField @JvmOverloads constructor(
     }
 
     private fun onTextChanged(before: Int, count: Int, pos: Int) {
+        if (invalid) invalid = false
         if (before != count) {
             if (count == 1 && !checkCompletion() && pos < childCount - 1) {
                 getChildAt(pos + 1)?.requestFocus()
