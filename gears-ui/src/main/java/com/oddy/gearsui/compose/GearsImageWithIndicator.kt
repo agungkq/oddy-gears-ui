@@ -12,24 +12,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.oddy.gearsui.R
 
-sealed class GearsImageWithIndicatorVariant(val painter: Painter, val alignIndicator: Alignment) {
-    data class AlignmentTopStart(val vPainter: Painter) :
-        GearsImageWithIndicatorVariant(vPainter, Alignment.TopStart)
+sealed class GearsImageWithIndicatorVariant(
+    val painter: Painter,
+    val alignIndicator: Alignment,
+    val isIndicatorVisible: Boolean = true
+) {
+    data class AlignmentTopStart(val vPainter: Painter, val vIsIndicatorVisible: Boolean = true) :
+        GearsImageWithIndicatorVariant(vPainter, Alignment.TopStart, vIsIndicatorVisible)
 
-    data class AlignmentTopEnd(val vPainter: Painter) :
-        GearsImageWithIndicatorVariant(vPainter, Alignment.TopEnd)
+    data class AlignmentTopEnd(val vPainter: Painter, val vIsIndicatorVisible: Boolean = true) :
+        GearsImageWithIndicatorVariant(vPainter, Alignment.TopEnd, vIsIndicatorVisible)
 
-    data class AlignmentTopCenter(val vPainter: Painter) :
-        GearsImageWithIndicatorVariant(vPainter, Alignment.TopCenter)
+    data class AlignmentTopCenter(val vPainter: Painter, val vIsIndicatorVisible: Boolean = true) :
+        GearsImageWithIndicatorVariant(vPainter, Alignment.TopCenter, vIsIndicatorVisible)
 
-    data class AlignmentBottomStart(val vPainter: Painter) :
-        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomStart)
+    data class AlignmentBottomStart(val vPainter: Painter, val vIsIndicatorVisible: Boolean = true) :
+        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomStart, vIsIndicatorVisible)
 
-    data class AlignmentBottomEnd(val vPainter: Painter) :
-        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomEnd)
+    data class AlignmentBottomEnd(val vPainter: Painter, val vIsIndicatorVisible: Boolean = true) :
+        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomEnd, vIsIndicatorVisible)
 
-    data class AlignmentBottomCenter(val vPainter: Painter) :
-        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomCenter)
+    data class AlignmentBottomCenter(val vPainter: Painter, val vIsIndicatorVisible: Boolean = true) :
+        GearsImageWithIndicatorVariant(vPainter, Alignment.BottomCenter, vIsIndicatorVisible)
 }
 
 @Composable
@@ -40,7 +44,10 @@ fun GearsImageWithIndicator(
 ) {
     Box(modifier = modifier) {
         Image(painter = variant.painter, contentDescription = "image")
-        CountIndicator(modifier = Modifier.align(variant.alignIndicator), count = count)
+        if (variant.isIndicatorVisible) CountIndicator(
+            modifier = Modifier.align(variant.alignIndicator),
+            count = count
+        )
     }
 }
 
@@ -112,6 +119,15 @@ fun GearsImageWithIndicatorPreview() {
             GearsImageWithIndicator(
                 variant = GearsImageWithIndicatorVariant.AlignmentBottomEnd(painterResource(id = R.drawable.ic_notification)),
                 count = 99
+            )
+        }
+
+        Row {
+            GearsImageWithIndicator(
+                variant = GearsImageWithIndicatorVariant.AlignmentBottomEnd(
+                    painterResource(id = R.drawable.ic_notification),
+                    vIsIndicatorVisible = false
+                )
             )
         }
     }

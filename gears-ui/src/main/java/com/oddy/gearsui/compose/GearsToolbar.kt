@@ -209,7 +209,11 @@ fun PreviewGearsToolbar() {
             modifier = Modifier
                 .padding(vertical = 5.dp)
                 .background(Color.Red),
-            variant = GearsToolbarVariant.VariantTransparent()
+            variant = GearsToolbarVariant.VariantTransparent(
+                vGearsImageWithIndicatorVariantEnd = GearsImageWithIndicatorVariant.AlignmentTopEnd(
+                    painterResource(id = R.drawable.ic_notification), vIsIndicatorVisible = false
+                )
+            )
         )
 
         GearsToolbar(
