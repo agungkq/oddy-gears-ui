@@ -62,6 +62,7 @@ fun GearsToolbar(
     modifier: Modifier = Modifier,
     variant: GearsToolbarVariant,
     title: String? = null,
+    subtitle: (@Composable () -> Unit)? = null,
     count: Int? = null,
     onButtonDrawableStartClicked: (() -> Unit)? = null,
     onButtonDrawableEndClicked: (() -> Unit)? = null
@@ -88,34 +89,43 @@ fun GearsToolbar(
         .fillMaxWidth()
         .height(72.dp)
 
-    Box(
-        modifier = mModifier
-            .fillMaxSize()
-            .padding(horizontal = 30.dp)
+    Row(
+        modifier = mModifier.padding(horizontal = 30.dp)
     ) {
         Icon(
             modifier = Modifier
-                .align(Alignment.CenterStart)
+                .align(Alignment.CenterVertically)
                 .clickable { onButtonDrawableStartClicked?.invoke() },
             painter = painterResource(id = R.drawable.ic_arrow_left),
             contentDescription = "arrow_left",
             tint = tintColor,
         )
 
-        if (variant is GearsToolbarVariant.VariantLight || variant is GearsToolbarVariant.VariantTransparent) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .align(Alignment.CenterVertically)
+        ) {
+            val color = if (variant is GearsToolbarVariant.VariantLight
+                || variant is GearsToolbarVariant.VariantTransparent
+            ) R.color.monochrome_800
+            else if (variant is GearsToolbarVariant.VariantDark) R.color.white
+            else R.color.white
+
             GearsText(
-                modifier = Modifier.align(Alignment.Center),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
                 text = title.orEmpty(),
                 type = GearsTextType.Heading18,
-                textColor = colorResource(id = R.color.monochrome_800)
+                textColor = colorResource(id = color)
             )
-        } else if (variant is GearsToolbarVariant.VariantDark) {
-            GearsText(
-                modifier = Modifier.align(Alignment.Center),
-                text = title.orEmpty(),
-                type = GearsTextType.Heading18,
-                textColor = colorResource(id = R.color.white)
-            )
+
+            if (subtitle != null) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(top = 2.dp)
+                ) { subtitle() }
+            }
         }
 
         when (variant.extraDrawable) {
@@ -124,7 +134,7 @@ fun GearsToolbar(
                     painterResource(id = (variant.extraDrawable as GearsToolbarVariant.ExtraDrawable.DrawableEnd).drawableEnd)
                 Image(
                     modifier = Modifier
-                        .align(Alignment.CenterEnd)
+                        .align(Alignment.CenterVertically)
                         .clickable { onButtonDrawableEndClicked?.invoke() },
                     painter = painter,
                     contentDescription = "drawable_end"
@@ -133,15 +143,55 @@ fun GearsToolbar(
             is GearsToolbarVariant.ExtraDrawable.DrawableEndWithIndicator -> {
                 GearsImageWithIndicator(
                     modifier = Modifier
-                        .align(Alignment.CenterEnd)
+                        .align(Alignment.CenterVertically)
                         .clickable { onButtonDrawableEndClicked?.invoke() },
                     variant = (variant.extraDrawable as GearsToolbarVariant.ExtraDrawable.DrawableEndWithIndicator).gearsImageWithIndicatorVariant,
                     count = count
                 )
             }
             is GearsToolbarVariant.ExtraDrawable.NoDrawableEnd -> Unit
-            else -> Unit
         }
+    }
+}
+
+@Preview
+@Composable()
+fun PreviewGearsToolbarWithSubtitle() {
+    Column(modifier = Modifier.background(Color.Gray)) {
+        GearsToolbar(
+            modifier = Modifier.padding(vertical = 5.dp),
+            variant = GearsToolbarVariant.VariantDark(R.drawable.ic_notification),
+            title = "List kendaraan",
+            subtitle = {
+                GearsText(
+                    text = "Topik GoJek",
+                    textColor = colorResource(id = R.color.monochrome_600)
+                )
+            }
+        )
+
+        GearsToolbar(
+            modifier = Modifier.padding(vertical = 5.dp),
+            variant = GearsToolbarVariant.VariantDark(R.drawable.ic_notification),
+            title = "List kendaraan",
+            subtitle = {
+                Row {
+                    GearsText(
+                        text = "Topik GoJek",
+                        textColor = colorResource(id = R.color.monochrome_600)
+                    )
+
+                    Icon(
+                        modifier = Modifier
+                            .padding(start = 8.dp)
+                            .align(Alignment.CenterVertically),
+                        painter = painterResource(id = R.drawable.ic_chevron_right_12),
+                        contentDescription = null,
+                        tint = colorResource(id = R.color.monochrome_600)
+                    )
+                }
+            }
+        )
     }
 }
 
