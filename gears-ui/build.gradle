@@ -53,6 +53,7 @@ dependencies {
     implementation "$libs.coil"
     implementation "$libs.paging"
     implementation "$libs.insets"
+    implementation "$libs.constraint_compose"
 }
 
 afterEvaluate {
