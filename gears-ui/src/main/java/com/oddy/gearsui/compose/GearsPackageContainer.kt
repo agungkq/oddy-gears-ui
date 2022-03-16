@@ -8,9 +8,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -38,137 +40,147 @@ fun GearsPackageContainer(
             color = colorResource(id = R.color.monochrome_100),
             shape = RoundedCornerShape(16.dp)
         )
-        .padding(top = 15.dp, start = 20.dp, end = 20.dp)
+        .padding(top = 15.dp)
 
-    ConstraintLayout(
-        modifier = Modifier
-            .wrapContentWidth()
-            .background(
-                color = colorResource(id = R.color.monochrome_100),
-                shape = RoundedCornerShape(16.dp)
-            )
-            .border(
-                2.dp,
-                color = colorResource(id = R.color.monochrome_300),
-                shape = RoundedCornerShape(16.dp)
-            )
-
+    Surface(
+        modifier = Modifier.clip(shape = RoundedCornerShape(16.dp)),
+        elevation = 20.dp
     ) {
-        val (body, lExpandCollapsed) = createRefs()
+        ConstraintLayout(
+            modifier = Modifier
+                .wrapContentWidth()
+                .background(
+                    color = colorResource(id = R.color.monochrome_100),
+                    shape = RoundedCornerShape(16.dp)
+                )
+                .border(
+                    2.dp,
+                    color = colorResource(id = R.color.monochrome_300),
+                    shape = RoundedCornerShape(16.dp)
+                )
 
-        ConstraintLayout(modifier = bodyModifier.constrainAs(body) {}) {
-            val (gtvPackageName, imgMaintenance, dotted, gtvTotalPackagePrice, gtvTotalItems, lContent, lSubName) = createRefs()
-            GearsText(
-                modifier = Modifier.constrainAs(gtvPackageName) {
-                    start.linkTo(parent.start)
-                    end.linkTo(imgMaintenance.start)
-                    top.linkTo(parent.top)
-                    width = Dimension.fillToConstraints
-                },
-                textAlign = TextAlign.Left,
-                text = packageName,
-                type = GearsTextType.Heading18,
-                textColor = colorResource(id = R.color.monochrome_800)
-            )
+        ) {
+            val (body, lExpandCollapsed) = createRefs()
 
-            Image(
-                modifier = Modifier.constrainAs(imgMaintenance) {
-                    top.linkTo(gtvPackageName.top)
-                    bottom.linkTo(gtvPackageName.bottom)
-                    end.linkTo(parent.end)
-                }, painter = painterResource(
-                    id =
-                    R.drawable.ic_maintenance
-                ), contentDescription = "img_maintenance"
-            )
-
-            AnimatedVisibility(
-                modifier = Modifier.constrainAs(lSubName) {
-                    top.linkTo(gtvPackageName.bottom, margin = 2.dp)
-                    start.linkTo(parent.start)
-                },
-                visible = !shouldContentVisible,
-                enter = fadeIn(animationSpec = tween(2000)),
-                exit = fadeOut(animationSpec = tween(500))
-            ) {
-                ConstraintLayout {
-                    GearsText(
-                        modifier = Modifier.constrainAs(gtvTotalPackagePrice) {
-                            top.linkTo(gtvPackageName.bottom, margin = 2.dp)
+            ConstraintLayout(modifier = bodyModifier.constrainAs(body) {}) {
+                val (gtvPackageName, imgMaintenance, dotted, gtvTotalPackagePrice, gtvTotalItems, lContent, lSubName) = createRefs()
+                GearsText(
+                    modifier = Modifier
+                        .constrainAs(gtvPackageName) {
                             start.linkTo(parent.start)
-                        },
-                        text = totalPackagePriceText,
-                        textColor = colorResource(id = R.color.dark_cyan),
-                        type = GearsTextType.Heading16
-                    )
-
-                    Box(modifier = Modifier
-                        .constrainAs(dotted) {
-                            top.linkTo(gtvTotalPackagePrice.top)
-                            bottom.linkTo(gtvTotalPackagePrice.bottom)
-                            start.linkTo(gtvTotalPackagePrice.end, margin = 5.dp)
+                            end.linkTo(imgMaintenance.start)
+                            top.linkTo(parent.top)
+                            width = Dimension.fillToConstraints
                         }
-                        .size(3.dp)
-                        .background(color = colorResource(id = R.color.monochrome_800)))
+                        .padding(start = 20.dp),
+                    textAlign = TextAlign.Left,
+                    text = packageName,
+                    type = GearsTextType.Heading18,
+                    textColor = colorResource(id = R.color.monochrome_800)
+                )
 
-                    GearsText(
-                        modifier = Modifier.constrainAs(gtvTotalItems) {
-                            start.linkTo(dotted.end, margin = 5.dp)
-                            top.linkTo(gtvTotalPackagePrice.top)
-                            bottom.linkTo(gtvTotalPackagePrice.bottom)
-                        },
-                        text = totalItemsText,
-                        type = GearsTextType.Body14,
-                        textColor = colorResource(id = R.color.monochrome_600)
-                    )
+                Image(
+                    modifier = Modifier
+                        .constrainAs(imgMaintenance) {
+                            top.linkTo(gtvPackageName.top)
+                            bottom.linkTo(gtvPackageName.bottom)
+                            end.linkTo(parent.end)
+                        }
+                        .padding(end = 20.dp),
+                    painter = painterResource(id = R.drawable.ic_maintenance),
+                    contentDescription = "img_maintenance"
+                )
+
+                AnimatedVisibility(
+                    modifier = Modifier.constrainAs(lSubName) {
+                        top.linkTo(gtvPackageName.bottom, margin = 2.dp)
+                        start.linkTo(parent.start)
+                    },
+                    visible = !shouldContentVisible,
+                    enter = fadeIn(animationSpec = tween(2000)),
+                    exit = fadeOut(animationSpec = tween(500))
+                ) {
+                    ConstraintLayout {
+                        GearsText(
+                            modifier = Modifier
+                                .constrainAs(gtvTotalPackagePrice) {
+                                    top.linkTo(gtvPackageName.bottom, margin = 2.dp)
+                                    start.linkTo(parent.start)
+                                }
+                                .padding(start = 20.dp),
+                            text = totalPackagePriceText,
+                            textColor = colorResource(id = R.color.dark_cyan),
+                            type = GearsTextType.Heading16
+                        )
+
+                        Box(modifier = Modifier
+                            .constrainAs(dotted) {
+                                top.linkTo(gtvTotalPackagePrice.top)
+                                bottom.linkTo(gtvTotalPackagePrice.bottom)
+                                start.linkTo(gtvTotalPackagePrice.end, margin = 5.dp)
+                            }
+                            .size(3.dp)
+                            .background(color = colorResource(id = R.color.monochrome_800)))
+
+                        GearsText(
+                            modifier = Modifier.constrainAs(gtvTotalItems) {
+                                start.linkTo(dotted.end, margin = 5.dp)
+                                top.linkTo(gtvTotalPackagePrice.top)
+                                bottom.linkTo(gtvTotalPackagePrice.bottom)
+                            },
+                            text = totalItemsText,
+                            type = GearsTextType.Body14,
+                            textColor = colorResource(id = R.color.monochrome_600)
+                        )
+                    }
+                }
+
+                Box(modifier = Modifier
+                    .constrainAs(lContent) {
+                        top.linkTo(
+                            if (shouldContentVisible) gtvPackageName.bottom else lSubName.top,
+                            margin = 15.dp
+                        )
+                    }
+                    .fillMaxWidth()) {
+                    AnimatedVisibility(
+                        visible = shouldContentVisible,
+                        enter = fadeIn(animationSpec = tween(1000)) + expandVertically(
+                            animationSpec = tween(1500)
+                        ),
+                        exit = fadeOut(animationSpec = tween(1000)) +
+                                shrinkVertically(
+                                    animationSpec = tween(1500)
+                                )
+                    ) {
+                        content()
+                    }
                 }
             }
 
             Box(modifier = Modifier
-                .constrainAs(lContent) {
-                    top.linkTo(
-                        if (shouldContentVisible) gtvPackageName.bottom else lSubName.top,
-                        margin = 15.dp
-                    )
+                .constrainAs(lExpandCollapsed) {
+                    top.linkTo(body.bottom, margin = 16.dp)
                 }
-                .fillMaxWidth()) {
-                AnimatedVisibility(
-                    visible = shouldContentVisible,
-                    enter = fadeIn(animationSpec = tween(1000)) + expandVertically(
-                        animationSpec = tween(1500)
-                    ),
-                    exit = fadeOut(animationSpec = tween(1000)) +
-                            shrinkVertically(
-                                animationSpec = tween(1500)
-                            )
-                ) {
-                    content()
-                }
+                .background(
+                    color = colorResource(id = R.color.monochrome_200),
+                    shape = RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp)
+                )
+                .fillMaxWidth()
+                .clickable {
+                    if (onExpandClicked == null)
+                        shouldContentVisible = !shouldContentVisible
+                    else onExpandClicked.invoke()
+                }) {
+                Image(
+                    modifier = Modifier
+                        .padding(vertical = 12.dp)
+                        .align(Alignment.Center)
+                        .rotate(if (shouldContentVisible) 180f else 0f),
+                    painter = painterResource(id = R.drawable.ic_chevron_down),
+                    contentDescription = "ic_chevron"
+                )
             }
-        }
-
-        Box(modifier = Modifier
-            .constrainAs(lExpandCollapsed) {
-                top.linkTo(body.bottom, margin = 16.dp)
-            }
-            .background(
-                color = colorResource(id = R.color.monochrome_200),
-                shape = RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp)
-            )
-            .fillMaxWidth()
-            .clickable {
-                if (onExpandClicked == null)
-                    shouldContentVisible = !shouldContentVisible
-                else onExpandClicked.invoke()
-            }) {
-            Image(
-                modifier = Modifier
-                    .padding(vertical = 12.dp)
-                    .align(Alignment.Center)
-                    .rotate(if (shouldContentVisible) 180f else 0f),
-                painter = painterResource(id = R.drawable.ic_chevron_down),
-                contentDescription = "ic_chevron"
-            )
         }
     }
 }
