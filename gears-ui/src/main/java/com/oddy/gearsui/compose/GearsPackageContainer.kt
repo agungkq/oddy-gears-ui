@@ -8,6 +8,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -43,7 +44,7 @@ fun GearsPackageContainer(
         .padding(top = 15.dp)
 
     Surface(
-        modifier = Modifier.clip(shape = RoundedCornerShape(16.dp)),
+        modifier = Modifier.clip(shape = RoundedCornerShape(6.dp)),
         elevation = 20.dp
     ) {
         ConstraintLayout(
@@ -164,7 +165,7 @@ fun GearsPackageContainer(
                 }
                 .background(
                     color = colorResource(id = R.color.monochrome_200),
-                    shape = RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp)
+                    shape = RoundedCornerShape(bottomEnd = 8.dp, bottomStart = 8.dp)
                 )
                 .fillMaxWidth()
                 .clickable {
@@ -172,6 +173,7 @@ fun GearsPackageContainer(
                         shouldContentVisible = !shouldContentVisible
                     else onExpandClicked.invoke()
                 }) {
+                Divider(color = colorResource(id = R.color.monochrome_300))
                 Image(
                     modifier = Modifier
                         .padding(vertical = 12.dp)
