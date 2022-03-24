@@ -41,7 +41,7 @@ fun GearsButton(
     isError: Boolean = false
 ) {
     val backgroundColor = when {
-        !isEnabled -> colorResource(id = R.color.black_500)
+        !isEnabled -> colorResource(id = R.color.grey_500)
         isError -> colorResource(R.color.ui_red)
         isLoading -> colorResource(id = R.color.black_500)
         else -> color
