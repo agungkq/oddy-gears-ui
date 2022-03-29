@@ -39,12 +39,12 @@ fun GearsPackageContainer(
         .fillMaxWidth()
         .background(
             color = colorResource(id = R.color.monochrome_100),
-            shape = RoundedCornerShape(32.dp)
+            shape = RoundedCornerShape(16.dp)
         )
         .padding(top = 15.dp)
 
     Surface(
-        modifier = Modifier.clip(shape = RoundedCornerShape(12.dp)),
+        modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)),
         elevation = 20.dp
     ) {
         ConstraintLayout(
@@ -52,18 +52,20 @@ fun GearsPackageContainer(
                 .wrapContentWidth()
                 .background(
                     color = colorResource(id = R.color.monochrome_100),
-                    shape = RoundedCornerShape(32.dp)
+                    shape = RoundedCornerShape(16.dp)
                 )
                 .border(
                     2.dp,
                     color = colorResource(id = R.color.monochrome_300),
-                    shape = RoundedCornerShape(32.dp)
+                    shape = RoundedCornerShape(16.dp)
                 )
 
         ) {
             val (body, lExpandCollapsed) = createRefs()
 
-            ConstraintLayout(modifier = bodyModifier.constrainAs(body) {}) {
+            ConstraintLayout(modifier = bodyModifier.constrainAs(body) {
+                top.linkTo(parent.top)
+            }) {
                 val (gtvPackageName, imgMaintenance, dotted, gtvTotalPackagePrice, gtvTotalItems, lContent, lSubName) = createRefs()
                 GearsText(
                     modifier = Modifier
@@ -161,7 +163,7 @@ fun GearsPackageContainer(
 
             Box(modifier = Modifier
                 .constrainAs(lExpandCollapsed) {
-                    top.linkTo(body.bottom)
+                    top.linkTo(body.bottom,10.dp)
                 }
                 .background(
                     color = colorResource(id = R.color.monochrome_200),
