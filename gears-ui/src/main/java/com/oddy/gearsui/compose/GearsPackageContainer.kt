@@ -163,7 +163,7 @@ fun GearsPackageContainer(
 
             Box(modifier = Modifier
                 .constrainAs(lExpandCollapsed) {
-                    top.linkTo(body.bottom)
+                    top.linkTo(body.bottom,10.dp)
                 }
                 .background(
                     color = colorResource(id = R.color.monochrome_200),
