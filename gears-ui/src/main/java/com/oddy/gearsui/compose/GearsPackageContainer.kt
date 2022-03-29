@@ -44,7 +44,7 @@ fun GearsPackageContainer(
         .padding(top = 15.dp)
 
     Surface(
-        modifier = Modifier.clip(shape = RoundedCornerShape(12.dp)),
+        modifier = Modifier.clip(shape = RoundedCornerShape(11.dp)),
         elevation = 20.dp
     ) {
         ConstraintLayout(
@@ -63,7 +63,9 @@ fun GearsPackageContainer(
         ) {
             val (body, lExpandCollapsed) = createRefs()
 
-            ConstraintLayout(modifier = bodyModifier.constrainAs(body) {}) {
+            ConstraintLayout(modifier = bodyModifier.constrainAs(body) {
+                top.linkTo(parent.top)
+            }) {
                 val (gtvPackageName, imgMaintenance, dotted, gtvTotalPackagePrice, gtvTotalItems, lContent, lSubName) = createRefs()
                 GearsText(
                     modifier = Modifier
