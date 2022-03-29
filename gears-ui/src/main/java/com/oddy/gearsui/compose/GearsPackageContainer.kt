@@ -39,12 +39,12 @@ fun GearsPackageContainer(
         .fillMaxWidth()
         .background(
             color = colorResource(id = R.color.monochrome_100),
-            shape = RoundedCornerShape(32.dp)
+            shape = RoundedCornerShape(16.dp)
         )
         .padding(top = 15.dp)
 
     Surface(
-        modifier = Modifier.clip(shape = RoundedCornerShape(11.dp)),
+        modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)),
         elevation = 20.dp
     ) {
         ConstraintLayout(
@@ -52,12 +52,12 @@ fun GearsPackageContainer(
                 .wrapContentWidth()
                 .background(
                     color = colorResource(id = R.color.monochrome_100),
-                    shape = RoundedCornerShape(32.dp)
+                    shape = RoundedCornerShape(16.dp)
                 )
                 .border(
                     2.dp,
                     color = colorResource(id = R.color.monochrome_300),
-                    shape = RoundedCornerShape(32.dp)
+                    shape = RoundedCornerShape(16.dp)
                 )
 
         ) {
