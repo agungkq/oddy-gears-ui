@@ -106,6 +106,14 @@ fun GearsTextBox(
             )
     }
 
+    val suffixPrefixModifier =
+        if (onClick == null) Modifier
+        else Modifier.clickable(
+            interactionSource = remember { MutableInteractionSource() },
+            indication = null,
+            onClick = onClick,
+        )
+
     val suffixPrefixColor = when {
         isError || errorMessage != null -> colorResource(id = R.color.ui_red)
         isFocused -> colorResource(id = R.color.teal)
@@ -183,7 +191,7 @@ fun GearsTextBox(
         ) {
             if (prefixIcon != null || prefixText != null) {
                 Box(
-                    modifier = Modifier
+                    modifier = suffixPrefixModifier
                         .height(40.dp)
                         .background(
                             color = colorResource(id = R.color.monochrome_200),
@@ -323,7 +331,7 @@ fun GearsTextBox(
 
             if (suffixIcon != null || suffixText != null) {
                 Box(
-                    modifier = Modifier
+                    modifier = suffixPrefixModifier
                         .height(40.dp)
                         .background(
                             color = colorResource(id = R.color.monochrome_200),
