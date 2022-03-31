@@ -3,10 +3,7 @@ package com.oddy.gearsui.compose
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -35,7 +32,7 @@ fun GearsLazyColumn(
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     itemsToListenState: LazyPagingItems<*>,
-    onFirstLoad: () -> Unit = {},
+    onFirstLoad: @Composable (LazyItemScope.() -> Unit) = {},
     content: LazyListScope.() -> Unit
 ) {
     LazyColumn(
@@ -64,7 +61,9 @@ fun GearsLazyColumn(
                         )
                     }
                 }
-                loadState.refresh is LoadState.Loading -> onFirstLoad()
+                loadState.refresh is LoadState.Loading -> item {
+                    onFirstLoad()
+                }
                 loadState.append is LoadState.Error || loadState.refresh is LoadState.Error -> {
                     coroutineScope.launch {
                         delay(5000)
