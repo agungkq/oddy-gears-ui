@@ -2,15 +2,14 @@ package com.oddy.gearsui.compose
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +33,7 @@ fun GearsPackageContainer(
     content: @Composable () -> Unit
 ) {
 
-    var shouldContentVisible by remember { mutableStateOf(false) }
+    var shouldContentVisible by rememberSaveable { mutableStateOf(false) }
     val bodyModifier = modifier
         .fillMaxWidth()
         .background(
@@ -163,7 +162,7 @@ fun GearsPackageContainer(
 
             Box(modifier = Modifier
                 .constrainAs(lExpandCollapsed) {
-                    top.linkTo(body.bottom,10.dp)
+                    top.linkTo(body.bottom, 10.dp)
                 }
                 .background(
                     color = colorResource(id = R.color.monochrome_200),
@@ -192,299 +191,811 @@ fun GearsPackageContainer(
 @Preview
 @Composable
 fun PreviewGearsPackageContainer() {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .background(color = colorResource(id = R.color.monochrome_200))
             .padding(15.dp)
     ) {
-        GearsPackageContainer(
-            packageName = "Servis 10.000 KM",
-            totalPackagePriceText = "Rp111.000",
-            totalItemsText = "7 item servis",
-            onExpandClicked = null,
-        ) {
-            Column() {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
+        item {
+            GearsPackageContainer(
+                packageName = "Servis 10.000 KM",
+                totalPackagePriceText = "Rp111.000",
+                totalItemsText = "7 item servis",
+                onExpandClicked = null,
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
 
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
-                }
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
 
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
-                }
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
 
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
-                }
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
 
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
-                }
-            }
-        }
-        Spacer(modifier = Modifier.height(5.dp))
-        GearsPackageContainer(
-            packageName = "Servis 10.000 KM",
-            totalPackagePriceText = "Rp111.000",
-            totalItemsText = "7 item servis",
-            onExpandClicked = null,
-        ) {
-            Column() {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
-
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
-
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
-
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
-
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
                 }
             }
         }
-        Spacer(modifier = Modifier.height(5.dp))
 
-        GearsPackageContainer(
-            packageName = "Servis 10.000 KM",
-            totalPackagePriceText = "Rp111.000",
-            totalItemsText = "7 item servis",
-            onExpandClicked = null,
-        ) {
-            Column() {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
+        item {
+            Spacer(modifier = Modifier.height(5.dp))
+            GearsPackageContainer(
+                packageName = "Servis 10.000 KM",
+                totalPackagePriceText = "Rp111.000",
+                totalItemsText = "7 item servis",
+                onExpandClicked = null,
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
 
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
                 }
+            }
+        }
+        item {
+            Spacer(modifier = Modifier.height(5.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
+            GearsPackageContainer(
+                packageName = "Servis 10.000 KM",
+                totalPackagePriceText = "Rp111.000",
+                totalItemsText = "7 item servis",
+                onExpandClicked = null,
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
 
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
                 }
+            }
+        }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
+        item {
+            Spacer(modifier = Modifier.height(5.dp))
 
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
+            GearsPackageContainer(
+                packageName = "Servis 10.000 KM",
+                totalPackagePriceText = "Rp111.000",
+                totalItemsText = "7 item servis",
+                onExpandClicked = null,
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
                 }
+            }
+        }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5
-                    ) {}
+        item {
+            Spacer(modifier = Modifier.height(5.dp))
 
-                    GearsBackgroundGradient(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(120.dp)
-                            .padding(10.dp),
-                        variant = GearsGradientVariant.Variant5,
-                        shape = RoundedCornerShape(16.dp)
-                    ) {}
+            GearsPackageContainer(
+                packageName = "Servis 10.000 KM",
+                totalPackagePriceText = "Rp111.000",
+                totalItemsText = "7 item servis",
+                onExpandClicked = null,
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+                }
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(5.dp))
+
+            GearsPackageContainer(
+                packageName = "Servis 10.000 KM",
+                totalPackagePriceText = "Rp111.000",
+                totalItemsText = "7 item servis",
+                onExpandClicked = null,
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+                }
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(5.dp))
+
+            GearsPackageContainer(
+                packageName = "Servis 10.000 KM",
+                totalPackagePriceText = "Rp111.000",
+                totalItemsText = "7 item servis",
+                onExpandClicked = null,
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+                }
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(5.dp))
+
+            GearsPackageContainer(
+                packageName = "Servis 10.000 KM",
+                totalPackagePriceText = "Rp111.000",
+                totalItemsText = "7 item servis",
+                onExpandClicked = null,
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5
+                        ) {}
+
+                        GearsBackgroundGradient(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(120.dp)
+                                .padding(10.dp),
+                            variant = GearsGradientVariant.Variant5,
+                            shape = RoundedCornerShape(16.dp)
+                        ) {}
+                    }
                 }
             }
         }
