@@ -43,8 +43,9 @@ fun GearsPackageContainer(
         .padding(top = 15.dp)
 
     Surface(
-        modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)),
-        elevation = 20.dp
+        elevation = 8.dp,
+        shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(width = 2.dp, color = colorResource(id = R.color.monochrome_300))
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -53,12 +54,6 @@ fun GearsPackageContainer(
                     color = colorResource(id = R.color.monochrome_100),
                     shape = RoundedCornerShape(16.dp)
                 )
-                .border(
-                    2.dp,
-                    color = colorResource(id = R.color.monochrome_300),
-                    shape = RoundedCornerShape(16.dp)
-                )
-
         ) {
             val (body, lExpandCollapsed) = createRefs()
 
