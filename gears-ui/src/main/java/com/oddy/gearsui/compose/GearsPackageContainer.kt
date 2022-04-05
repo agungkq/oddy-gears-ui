@@ -18,6 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
@@ -30,6 +31,7 @@ fun GearsPackageContainer(
     totalPackagePriceText: String,
     totalItemsText: String,
     onExpandClicked: (() -> Unit)? = null,
+    elevation: Dp = 4.dp,
     content: @Composable () -> Unit
 ) {
 
@@ -43,7 +45,7 @@ fun GearsPackageContainer(
         .padding(top = 15.dp)
 
     Surface(
-        elevation = 8.dp,
+        elevation = if (shouldContentVisible) elevation else 0.dp,
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(width = 2.dp, color = colorResource(id = R.color.monochrome_300))
     ) {
