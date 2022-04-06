@@ -32,6 +32,7 @@ fun GearsPackageContainer(
     totalItemsText: String,
     onExpandClicked: (() -> Unit)? = null,
     elevation: Dp = 4.dp,
+    borderWidth: Dp = 2.dp,
     content: @Composable () -> Unit
 ) {
 
@@ -47,7 +48,10 @@ fun GearsPackageContainer(
     Surface(
         elevation = if (shouldContentVisible) elevation else 0.dp,
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(width = 2.dp, color = colorResource(id = R.color.monochrome_300))
+        border = BorderStroke(
+            width = borderWidth,
+            color = colorResource(id = R.color.monochrome_300)
+        )
     ) {
         ConstraintLayout(
             modifier = Modifier
