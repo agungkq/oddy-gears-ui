@@ -89,8 +89,8 @@ fun GearsPackageContainer(
                             bottom.linkTo(gtvPackageName.bottom)
                             end.linkTo(parent.end)
                         }
-                        .size(24.dp)
-                        .padding(end = 20.dp),
+                        .padding(end = 20.dp)
+                        .size(24.dp),
                     painter = painterResource(id = R.drawable.ic_maintenance),
                     contentDescription = "img_maintenance"
                 )
