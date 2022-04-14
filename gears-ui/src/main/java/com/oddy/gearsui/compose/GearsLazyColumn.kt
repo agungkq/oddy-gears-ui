@@ -56,8 +56,9 @@ fun GearsLazyColumn(
                     ) {
                         CircularProgressIndicator(
                             modifier = Modifier
-                                .size(8.dp)
-                                .align(Alignment.Center)
+                                .size(16.dp)
+                                .align(Alignment.Center),
+                            strokeWidth = 2.dp
                         )
                     }
                 }
@@ -74,3 +75,4 @@ fun GearsLazyColumn(
         }
     }
 }
+
