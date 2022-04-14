@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oddy.gearsui.R
+import com.oddy.gearsui.utils.disableRipple
 import kotlinx.coroutines.flow.collect
 
 @Composable
@@ -53,6 +54,7 @@ fun GearsTextBox(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     textFieldValue: TextFieldValue? = null,
+    enableSuffixClickToFocusToTextField: Boolean = false,
     onTextFieldValueChanged: ((TextFieldValue) -> Unit)? = null,
     value: String? = null,
     onValueChanged: ((String) -> Unit)? = null,
@@ -336,7 +338,8 @@ fun GearsTextBox(
                         .background(
                             color = colorResource(id = R.color.monochrome_200),
                             shape = RoundedCornerShape(16.dp)
-                        ),
+                        )
+                        .disableRipple(remember { MutableInteractionSource() }) { if (enableSuffixClickToFocusToTextField) focusRequester.requestFocus() },
                     contentAlignment = Alignment.Center
                 ) {
                     if (suffixIcon != null) {
