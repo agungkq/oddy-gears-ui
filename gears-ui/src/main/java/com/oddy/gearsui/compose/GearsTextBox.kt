@@ -54,7 +54,6 @@ fun GearsTextBox(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     textFieldValue: TextFieldValue? = null,
-    enableSuffixClickToFocusToTextField: Boolean = false,
     onTextFieldValueChanged: ((TextFieldValue) -> Unit)? = null,
     value: String? = null,
     onValueChanged: ((String) -> Unit)? = null,
@@ -338,8 +337,7 @@ fun GearsTextBox(
                         .background(
                             color = colorResource(id = R.color.monochrome_200),
                             shape = RoundedCornerShape(16.dp)
-                        )
-                        .disableRipple(remember { MutableInteractionSource() }) { if (enableSuffixClickToFocusToTextField) focusRequester.requestFocus() },
+                        ),
                     contentAlignment = Alignment.Center
                 ) {
                     if (suffixIcon != null) {
