@@ -9,9 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import com.oddy.gearsui.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -49,16 +52,22 @@ fun GearsLazyColumn(
         itemsToListenState.apply {
             when {
                 loadState.append is LoadState.Loading -> item {
-                    Box(
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 5.dp)
+                            .padding(vertical = 5.dp),
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         CircularProgressIndicator(
-                            modifier = Modifier
-                                .size(16.dp)
-                                .align(Alignment.Center),
+                            modifier = Modifier.size(16.dp),
                             strokeWidth = 2.dp
+                        )
+
+                        GearsText(
+                            modifier = Modifier.padding(start = 8.dp),
+                            text = stringResource(id = R.string.loading),
+                            type = GearsTextType.Body14,
+                            textColor = colorResource(id = R.color.monochrome_700)
                         )
                     }
                 }
