@@ -13,8 +13,17 @@ import com.oddy.gearsui.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+sealed class ShakingOrientation {
+    object Horizontal : ShakingOrientation()
+    object Vertical : ShakingOrientation()
+}
+
 @Composable
-fun ShakingAnimation(startAnimation: Boolean, content: @Composable () -> Unit) {
+fun ShakingAnimation(
+    orientation: ShakingOrientation = ShakingOrientation.Horizontal,
+    startAnimation: Boolean,
+    content: @Composable () -> Unit
+) {
     var enableAnimation by remember { mutableStateOf(startAnimation) }
     val scope = rememberCoroutineScope()
 
@@ -43,22 +52,45 @@ fun ShakingAnimation(startAnimation: Boolean, content: @Composable () -> Unit) {
 
         BoxWithConstraints {
             Box(
-                modifier = Modifier.offset(
-                    y =
-                    when {
-                        shakingState.value == 0f -> 0.dp
-                        shakingState.value < 0.5f -> {
-                            10.dp + (10.dp * shakingState.value)
+                modifier = if (orientation == ShakingOrientation.Horizontal) {
+                    Modifier.offset(
+                        x =
+                        when {
+                            shakingState.value == 0f -> 0.dp
+                            shakingState.value < 0.5f -> {
+                                10.dp + (10.dp * shakingState.value)
+                            }
+                            else -> {
+                                10.dp - (10.dp * shakingState.value)
+                            }
                         }
-                        else -> {
-                            10.dp - (10.dp * shakingState.value)
+                    )
+                } else {
+                    Modifier.offset(
+                        y =
+                        when {
+                            shakingState.value == 0f -> 0.dp
+                            shakingState.value < 0.5f -> {
+                                10.dp + (10.dp * shakingState.value)
+                            }
+                            else -> {
+                                10.dp - (10.dp * shakingState.value)
+                            }
                         }
-                    }
-                )
+                    )
+                }
+
             ) { content() }
         }
     } else {
-        Box(modifier = Modifier.offset(y = 0.dp)) {
+        Box(
+            modifier =
+            if (orientation == ShakingOrientation.Horizontal) {
+                Modifier.offset(x = 0.dp)
+            } else {
+                Modifier.offset(y = 0.dp)
+            }
+        ) {
             content()
         }
     }
