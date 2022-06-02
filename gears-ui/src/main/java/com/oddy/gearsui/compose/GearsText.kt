@@ -1,12 +1,14 @@
 package com.oddy.gearsui.compose
 
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -17,6 +19,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.oddy.gearsui.R
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 sealed class GearsTextType(
     val textSize: TextUnit,
@@ -97,5 +102,40 @@ fun GearsText(
         fontStyle = fontStyle,
         inlineContent = inlineContent,
         style = textStyle,
+    )
+}
+
+@Composable
+fun GearsClickableText(
+    text: AnnotatedString,
+    modifier: Modifier = Modifier,
+    style: TextStyle = TextStyle.Default,
+    softWrap: Boolean = true,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+    onTextLayout: (TextLayoutResult) -> Unit = {},
+    onClick: (Int) -> Unit
+) {
+    val coroutineScope = rememberCoroutineScope()
+    var clickableJob by remember { mutableStateOf<Job?>(null) }
+
+    ClickableText(
+        text = text,
+        modifier = modifier,
+        style = style,
+        softWrap = softWrap,
+        overflow = overflow,
+        maxLines = maxLines,
+        onTextLayout = onTextLayout,
+        onClick = { offset ->
+            if (clickableJob == null) {
+                clickableJob = coroutineScope.launch {
+                    onClick(offset)
+
+                    delay(500)
+                    clickableJob = null
+                }
+            }
+        }
     )
 }
