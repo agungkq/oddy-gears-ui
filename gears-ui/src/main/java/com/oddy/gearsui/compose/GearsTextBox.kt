@@ -30,8 +30,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oddy.gearsui.R
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import com.oddy.gearsui.utils.disableRipple
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @Composable
 fun GearsTextBox(
@@ -59,6 +62,19 @@ fun GearsTextBox(
     onValueChanged: ((String) -> Unit)? = null,
     onClick: (() -> Unit)? = null,
 ) {
+    val coroutineScope = rememberCoroutineScope()
+    var clickableJob by remember { mutableStateOf<Job?>(null) }
+    val pendingClickAction = {
+        if (clickableJob == null) {
+            clickableJob = coroutineScope.launch {
+                onClick!!()
+
+                delay(1000)
+                clickableJob = null
+            }
+        }
+    }
+
     var isFocused by remember { mutableStateOf(false) }
     val focusRequester = FocusRequester()
     var rowModifier = if (!isEnabled) {
@@ -112,7 +128,7 @@ fun GearsTextBox(
         else Modifier.clickable(
             interactionSource = remember { MutableInteractionSource() },
             indication = null,
-            onClick = onClick,
+            onClick = pendingClickAction,
         )
 
     val suffixPrefixColor = when {
@@ -253,7 +269,7 @@ fun GearsTextBox(
                             LaunchedEffect(interactionSource) {
                                 interactionSource.interactions.collect {
                                     if (it is PressInteraction.Release) {
-                                        onClick()
+                                        pendingClickAction()
                                     }
                                 }
                             }
@@ -290,7 +306,7 @@ fun GearsTextBox(
                             LaunchedEffect(interactionSource) {
                                 interactionSource.interactions.collect {
                                     if (it is PressInteraction.Release) {
-                                        onClick()
+                                        pendingClickAction()
                                     }
                                 }
                             }
