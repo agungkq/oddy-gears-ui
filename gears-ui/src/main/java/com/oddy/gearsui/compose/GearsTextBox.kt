@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import com.oddy.gearsui.R
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import com.oddy.gearsui.utils.disableRipple
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 

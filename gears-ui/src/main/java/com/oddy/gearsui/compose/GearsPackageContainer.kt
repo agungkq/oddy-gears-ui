@@ -18,6 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
@@ -30,6 +31,8 @@ fun GearsPackageContainer(
     totalPackagePriceText: String,
     totalItemsText: String,
     onExpandClicked: (() -> Unit)? = null,
+    elevation: Dp = 4.dp,
+    borderWidth: Dp = 2.dp,
     content: @Composable () -> Unit
 ) {
 
@@ -43,8 +46,12 @@ fun GearsPackageContainer(
         .padding(top = 15.dp)
 
     Surface(
-        modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)),
-        elevation = 20.dp
+        elevation = if (shouldContentVisible) elevation else 0.dp,
+        shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(
+            width = borderWidth,
+            color = colorResource(id = R.color.monochrome_300)
+        )
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -53,12 +60,6 @@ fun GearsPackageContainer(
                     color = colorResource(id = R.color.monochrome_100),
                     shape = RoundedCornerShape(16.dp)
                 )
-                .border(
-                    2.dp,
-                    color = colorResource(id = R.color.monochrome_300),
-                    shape = RoundedCornerShape(16.dp)
-                )
-
         ) {
             val (body, lExpandCollapsed) = createRefs()
 
@@ -88,7 +89,8 @@ fun GearsPackageContainer(
                             bottom.linkTo(gtvPackageName.bottom)
                             end.linkTo(parent.end)
                         }
-                        .padding(end = 20.dp),
+                        .padding(end = 20.dp)
+                        .size(24.dp),
                     painter = painterResource(id = R.drawable.ic_maintenance),
                     contentDescription = "img_maintenance"
                 )

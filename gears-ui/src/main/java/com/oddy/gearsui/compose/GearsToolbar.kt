@@ -115,6 +115,7 @@ fun GearsToolbar(
             GearsText(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 text = title.orEmpty(),
+                maxLines = 2,
                 type = GearsTextType.Heading18,
                 textColor = colorResource(id = color)
             )
