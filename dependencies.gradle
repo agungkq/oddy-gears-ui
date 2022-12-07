@@ -3,7 +3,7 @@ ext {
 
     plugins = [
             android_gradle: "com.android.tools.build:gradle:7.0.4",
-            kotlin        : "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+            kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20"
     ]
 
     libs = [
@@ -18,6 +18,8 @@ ext {
             activity_compose  : "androidx.activity:activity-compose:1.4.0",
             viewmodel_compose : "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0",
             constraint_compose: "androidx.constraintlayout:constraintlayout-compose:1.0.0",
+            foundation        : "androidx.compose.foundation:foundation:$composeUiVersion",
+            animation         : "androidx.compose.animation:animation:$composeUiVersion",
             coil              : "com.github.skydoves:landscapist-coil:1.4.1",
             paging            : "androidx.paging:paging-compose:1.0.0-alpha17",
             insets            : "com.google.accompanist:accompanist-insets:0.22.0-rc"
