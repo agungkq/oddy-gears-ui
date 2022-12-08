@@ -168,7 +168,7 @@ fun GearsScaffold(
     }
 
     GearsSideDialog(
-        modifier = modifier.imePadding(),
+        modifier = modifier,
         sideDialogState = gearsScaffoldState.sideDialogState,
         gesturesEnabled = gearsScaffoldState.sideDialogState.isOpen,
         sideDialogContent = sideDialogContent,
@@ -235,7 +235,7 @@ fun GearsScaffold(
 
     GearsModalBottomSheetLayout(
         sheetContent = sheetContent,
-        modifier = modifier.imePadding(),
+        modifier = modifier,
         sheetState = gearsScaffoldState.modalBottomSheetState,
         sheetShape = sheetShape,
         sheetElevation = sheetElevation,
@@ -309,7 +309,7 @@ fun GearsScaffold(
     }
 
     GearsSideDialog(
-        modifier = modifier.imePadding(),
+        modifier = modifier,
         sideDialogState = gearsScaffoldState.sideDialogState,
         gesturesEnabled = gearsScaffoldState.sideDialogState.isOpen,
         sideDialogContent = sideDialogContent,
