@@ -35,53 +35,75 @@ fun GearsLazyColumn(
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     itemsToListenState: LazyPagingItems<*>,
-    onFirstLoad: @Composable (LazyItemScope.() -> Unit) = {},
+    onFirstLoad: @Composable LazyItemScope.() -> Unit = {
+        Box(
+            modifier = Modifier.fillParentMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator(color = colorResource(id = R.color.dark_cyan))
+        }
+    },
+    onEmptyLoad: (@Composable () -> Unit)? = null,
+    onLoading: @Composable (LazyItemScope.() -> Unit)? = null,
     content: LazyListScope.() -> Unit
 ) {
-    LazyColumn(
-        modifier,
-        state,
-        contentPadding,
-        reverseLayout,
-        verticalArrangement,
-        horizontalAlignment,
-        flingBehavior
-    ) {
-        content()
+    val isLoadedEmpty = with(itemsToListenState) {
+        itemCount == 0 && loadState.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached
+    }
 
-        itemsToListenState.apply {
-            when {
-                loadState.append is LoadState.Loading -> item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 5.dp),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(16.dp),
-                            strokeWidth = 2.dp
-                        )
+    if (isLoadedEmpty && onEmptyLoad != null) {
+        onEmptyLoad()
+    } else {
+        LazyColumn(
+            modifier,
+            state,
+            contentPadding,
+            reverseLayout,
+            verticalArrangement,
+            horizontalAlignment,
+            flingBehavior
+        ) {
+            itemsToListenState.apply {
+                if (loadState.refresh is LoadState.NotLoading || onLoading == null) content()
 
-                        GearsText(
-                            modifier = Modifier.padding(start = 8.dp),
-                            text = stringResource(id = R.string.loading),
-                            type = GearsTextType.Body14,
-                            textColor = colorResource(id = R.color.monochrome_700)
-                        )
+                val isLoading = loadState.refresh == LoadState.Loading
+                val isFirstLoading = itemCount == 0 && isLoading
+
+                when {
+                    loadState.append is LoadState.Loading -> item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 5.dp),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(16.dp),
+                                strokeWidth = 2.dp
+                            )
+
+                            GearsText(
+                                modifier = Modifier.padding(start = 8.dp),
+                                text = stringResource(id = R.string.loading),
+                                type = GearsTextType.Body14,
+                                textColor = colorResource(id = R.color.black_500)
+                            )
+                        }
                     }
-                }
-                loadState.refresh is LoadState.Loading -> item {
-                    onFirstLoad()
-                }
-                loadState.append is LoadState.Error || loadState.refresh is LoadState.Error -> {
-                    coroutineScope.launch {
-                        delay(5000)
-                        retry()
+                    isFirstLoading -> item {
+                        onFirstLoad()
+                    }
+                    isLoading -> onLoading?.let {
+                        item { it() }
+                    }
+                    loadState.append is LoadState.Error || loadState.refresh is LoadState.Error -> {
+                        coroutineScope.launch {
+                            delay(5000)
+                            retry()
+                        }
                     }
                 }
             }
         }
     }
 }
-
