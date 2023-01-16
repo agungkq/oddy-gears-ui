@@ -8,17 +8,20 @@ import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,8 +35,6 @@ import androidx.compose.ui.unit.sp
 import com.oddy.gearsui.R
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import com.oddy.gearsui.utils.disableRipple
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Composable
@@ -54,13 +55,15 @@ fun GearsTextBox(
     singleLine: Boolean = true,
     readOnly: Boolean = false,
     contentAlignment: Alignment = Alignment.CenterStart,
+    focusManager: FocusManager = LocalFocusManager.current,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions(onDone = { focusManager.clearFocus(true) }),
     visualTransformation: VisualTransformation = VisualTransformation.None,
     textFieldValue: TextFieldValue? = null,
     onTextFieldValueChanged: ((TextFieldValue) -> Unit)? = null,
     value: String? = null,
     onValueChanged: ((String) -> Unit)? = null,
-    onClick: (() -> Unit)? = null,
+    onClick: (() -> Unit)? = null
 ) {
     val coroutineScope = rememberCoroutineScope()
     var clickableJob by remember { mutableStateOf<Job?>(null) }
@@ -262,6 +265,7 @@ fun GearsTextBox(
                     singleLine = singleLine,
                     textStyle = textStyle,
                     keyboardOptions = keyboardOptions,
+                    keyboardActions = keyboardActions,
                     readOnly = readOnly,
                     interactionSource = remember { MutableInteractionSource() }
                         .also { interactionSource ->
@@ -299,6 +303,7 @@ fun GearsTextBox(
                     singleLine = singleLine,
                     textStyle = textStyle,
                     keyboardOptions = keyboardOptions,
+                    keyboardActions = keyboardActions,
                     readOnly = readOnly,
                     interactionSource = remember { MutableInteractionSource() }
                         .also { interactionSource ->
